@@ -14,9 +14,9 @@ app.use(cors());
 app.use(express.json());
 
 // Rota de teste
-//app.get('/', (req, res) => {
+app.get('/', (req, res) => {
   //res.send('Servidor do SIA-QME está no ar!');//
-//});//
+});
 
 // 2. Crie uma rota "catch-all" (*)
 // Se nenhuma rota de API for correspondida, envie o arquivo principal do frontend (index.html)
