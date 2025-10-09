@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -13,10 +14,16 @@ app.use(cors());
 app.use(express.json());
 
 // Rota de teste
-app.get('/', (req, res) => {
-  res.send('Servidor do SIA-QME está no ar!');
-});
+//app.get('/', (req, res) => {
+  //res.send('Servidor do SIA-QME está no ar!');//
+//});//
 
+// 2. Crie uma rota "catch-all" (*)
+// Se nenhuma rota de API for correspondida, envie o arquivo principal do frontend (index.html)
+// Isso permite que o React cuide do roteamento da página.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 // --- ROTAS DE AUTENTICAÇÃO ---
 
@@ -751,6 +758,7 @@ app.get('/api/complaints/:id/messages', authMiddleware, async (req, res) => {
 });
 
 // --- INÍCIO DO SERVIDOR ---
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
