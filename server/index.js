@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Rota de teste
 app.get('/', (req, res) => {
-  //res.send('Servidor do SIA-QME está no ar!');//
+  res.send('Servidor do SIA-QME está no ar!');
 });
 
 // 2. Crie uma rota "catch-all" (*)
