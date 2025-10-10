@@ -64,16 +64,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const authFetch = (url: string, options: RequestInit = {}) => {
     const token = localStorage.getItem('token');
     
-    const headers: HeadersInit = {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    };
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json'); // É uma boa prática incluir isso
 
     if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
+      headers.append('Authorization', `Bearer ${token}`);
     }
 
-    const backendUrl = 'http://localhost:3001';
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL;
     const fullUrl = url.startsWith('http') ? url : `${backendUrl}${url}`;
 
     console.log(`Enviando requisição para: ${fullUrl}`);
