@@ -31,7 +31,7 @@ app.get('/api/status', (req, res) => {
 //});//
 
   // --- ROTAS DE AUTENTICAÇÃO ---
-  /
+  
   app.post('/api/auth/register', async (req, res) => {
     const { name, email, password, role } = req.body;
     if (!name || !email || !password || !role) {
