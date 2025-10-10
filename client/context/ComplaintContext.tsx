@@ -67,7 +67,7 @@ export const ComplaintProvider = ({ children }: { children: ReactNode }) => {
   const handleSubmit = async () => {
   console.log("DADOS FINAIS PARA ENVIO:", complaintData);
   try {
-    const response = await authFetch('http://localhost:3001/api/complaints', {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`, {
       method: 'POST',
       body: JSON.stringify(complaintData),
     });

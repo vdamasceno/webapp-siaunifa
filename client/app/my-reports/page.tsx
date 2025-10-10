@@ -25,7 +25,7 @@ export default function MyReportsPage() {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await authFetch('http://localhost:3001/api/my-assessments');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`);
         if (!response.ok) {
           throw new Error('Falha ao buscar seus pareceres de saúde.');
         }
