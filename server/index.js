@@ -18,6 +18,11 @@ app.get('/', (req, res) => {
   res.send('Servidor do SIA-QME está no ar!');
 });
 
+// 👇👇👇 ADICIONE ESTE BLOCO DE CÓDIGO AQUI 👇👇👇
+app.get('/api/status', (req, res) => {
+  res.send('O servidor mínimo está funcionando!');
+});
+
 // 2. Crie uma rota "catch-all" (*)
 // Se nenhuma rota de API for correspondida, envie o arquivo principal do frontend (index.html)
 // Isso permite que o React cuide do roteamento da página.
