@@ -7,10 +7,12 @@ const db = require('./db');
 const authMiddleware = require('./middleware/auth');
 const { Parser } = require('json2csv')
 
+const app = express();
+
 const corsOptions = {
-  origin: 'https://sia-qme-fab-client.onrender.com', // A URL DO SEU CLIENT
-  optionsSuccessStatus: 200 // Para navegadores mais antigos
-};
+  origin: 'https://sia-qme-fab-client.onrender.com',
+  optionsSuccessStatus: 200
+}
 
 app.use(cors(corsOptions));
 app.use(express.json());
