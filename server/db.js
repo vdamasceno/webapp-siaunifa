@@ -1,16 +1,17 @@
 const { Pool } = require('pg');
-require('dotenv').config();
 
-// O Pool gerencia múltiplas conexões com o banco de forma eficiente
+// Esta configuração verifica se estamos em produção (no Render) ou não.
+const isProduction = process.env.NODE_ENV === 'production';
+
+const connectionString = process.env.DATABASE_URL;
+
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  connectionString: connectionString,
+  // Esta configuração de SSL é ESSENCIAL para o Render.
+  // Em desenvolvimento (no seu PC), não usamos SSL.
+  ssl: isProduction ? { rejectUnauthorized: false } : false
 });
 
-// Exportamos um método query para ser usado em outras partes do nosso app
 module.exports = {
   query: (text, params) => pool.query(text, params),
 };
