@@ -10,7 +10,7 @@ const { Parser } = require('json2csv')
 const app = express();
 
 const corsOptions = {
-  origin: 'https://webapp-siaunifa-client.onrender.com', 
+  origin: 'https://sia-qme-fab-client-0y95.onrender.com/login', 
   optionsSuccessStatus: 200
 };
 
