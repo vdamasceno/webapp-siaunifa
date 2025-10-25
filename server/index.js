@@ -9,9 +9,19 @@ const { Parser } = require('json2csv')
 
 const app = express();
 
+const allowedOrigins = [
+  'https://webapp-siaunifa-client.onrender.com',
+  'https://sia-qme-fab-client-0y95.onrender.com' // <-- ADICIONE A NOVA URL
+];
+
 const corsOptions = {
-  origin: 'https://sia-qme-fab-client-0y95.onrender.com/login', 
-  optionsSuccessStatus: 200
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 };
 
 app.use(cors(corsOptions));
