@@ -1,3 +1,4 @@
+// --- INÍCIO DO CÓDIGO CORRIGIDO ---
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -9,26 +10,33 @@ const { Parser } = require('json2csv')
 
 const app = express();
 
-// Primeiro, defina de qual URL você quer aceitar requisições
+// Juntamos TODAS as URLs que você precisa em UMA lista só
 const allowedOrigins = [
-  'https://webapp-siaunifa-frontend.onrender.com' // Sua nova URL do frontend
+  'https://webapp-siaunifa-frontend.onrender.com', // O seu frontend novo
+  'https://webapp-siaunifa-client.onrender.com', // Um frontend antigo
+  'https://sia-qme-fab-client-0y95.onrender.com'  // O outro frontend antigo
 ];
 
+// Usamos UMA versão da configuração do CORS
 const corsOptions = {
   origin: function (origin, callback) {
     // Permitir requisições sem 'origin' (como apps mobile ou Postman)
     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.indexOf(origin) === -1) {
+    // Se a origem estiver na lista, permite
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    } else {
+      // Se não estiver, bloqueia
       const msg = 'A política de CORS para este site não permite acesso da Origem especificada.';
       return callback(new Error(msg), false);
     }
-    return callback(null, true);
   }
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.options('*', cors(corsOptions));
 
 // Rota de teste
 app.get('/', (req, res) => {
