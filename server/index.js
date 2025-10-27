@@ -9,9 +9,22 @@ const { Parser } = require('json2csv')
 
 const app = express();
 
+// Primeiro, defina de qual URL você quer aceitar requisições
+const allowedOrigins = [
+  'https://webapp-siaunifa-frontend.onrender.com' // Sua nova URL do frontend
+];
+
 const corsOptions = {
-  origin: 'https://webapp-siaunifa-client.onrender.com', 
-  optionsSuccessStatus: 200
+  origin: function (origin, callback) {
+    // Permitir requisições sem 'origin' (como apps mobile ou Postman)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'A política de CORS para este site não permite acesso da Origem especificada.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
 };
 
 app.use(cors(corsOptions));
