@@ -645,14 +645,16 @@ app.get('/api/status', (req, res) => {
   app.get('/api/notifications', authMiddleware, async (req, res) => {
     const userId = req.user.id;
     try {
-      const notificationsQuery = `SELECT id, message, link, is_read, created_at FROM notifications WHERE user_id = $1 ORDER BY created_at DESC;`;
-      const notificationsResult = await db.query(notificationsQuery, [userId]);
       const unreadCountQuery = `SELECT COUNT(*) FROM notifications WHERE user_id = $1 AND is_read = FALSE;`;
       const unreadCountResult = await db.query(unreadCountQuery, [userId]);
-      res.status(200).json({ notifications: notificationsResult.rows, unreadCount: parseInt(unreadCountResult.rows[0].count, 10) });
+      const count = parseInt(unreadCountResult.rows[0].count, 10);
+
+      // Responde apenas com o número
+      res.status(200).json({ unreadCount: count });
+
     } catch (error) {
-      console.error('Erro ao buscar notificações:', error);
-      res.status(500).json({ error: 'Ocorreu um erro ao buscar suas notificações.' });
+      console.error('Erro ao contar notificações:', error);
+      res.status(500).json({ error: 'Erro no servidor ao contar notificações.' });
     }
   });
 
