@@ -13,8 +13,6 @@ const app = express();
 // Juntamos TODAS as URLs que você precisa em UMA lista só
 const allowedOrigins = [
   'https://webapp-siaunifa-frontend.onrender.com', // O seu frontend novo
-  'https://webapp-siaunifa-client.onrender.com', // Um frontend antigo
-  'https://sia-qme-fab-client-0y95.onrender.com'  // O outro frontend antigo
 ];
 
 // Usamos UMA versão da configuração do CORS
