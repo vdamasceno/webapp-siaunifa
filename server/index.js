@@ -55,7 +55,8 @@ app.get('/api/status', (req, res) => {
   //res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 //});//
 
-  // --- ROTAS DE AUTENTICAÇÃO ---
+/*
+// --- ROTAS DE AUTENTICAÇÃO ---
   
   app.post('/api/auth/register', async (req, res) => {
     const { name, email, password, role } = req.body;
@@ -497,9 +498,8 @@ app.get('/api/status', (req, res) => {
       }
   });
 
-  /*
-   * ROTA PARA BUSCAR O HISTÓRICO COMPLETO DE SAÚDE DE UM PILOTO (VERSÃO FINAL COM TODOS OS STATS)
-   */
+  //ROTA PARA BUSCAR O HISTÓRICO COMPLETO DE SAÚDE DE UM PILOTO (VERSÃO FINAL COM TODOS OS STATS)
+  
    app.get('/api/pilot-health-summary', authMiddleware, async (req, res) => {
     const pilotUserId = req.user.id;
 
@@ -672,9 +672,8 @@ app.get('/api/status', (req, res) => {
     }
   });
 
-  /*
-   * ROTA PARA ENVIAR UMA NOVA MENSAGEM EM UMA CONVERSA DE QUEIXA
-   */
+  //ROTA PARA ENVIAR UMA NOVA MENSAGEM EM UMA CONVERSA DE QUEIXA
+  
   app.post('/api/complaints/:id/messages', authMiddleware, async (req, res) => {
     const { id: complaintId } = req.params;
     const { id: senderId, name: senderName } = req.user;
@@ -740,9 +739,8 @@ app.get('/api/status', (req, res) => {
     }
   });
 
-  /**
-   * ROTA PARA BUSCAR TODAS AS MENSAGENS DE UMA CONVERSA
-   */
+  //ROTA PARA BUSCAR TODAS AS MENSAGENS DE UMA CONVERSA
+  
   app.get('/api/complaints/:id/messages', authMiddleware, async (req, res) => {
       const { id: complaintId } = req.params;
       const { id: userId, role } = req.user;
@@ -785,7 +783,7 @@ app.get('/api/status', (req, res) => {
           res.status(500).json({ error: 'Erro no servidor ao buscar mensagens.' });
       }
   });
-  
+*/  
 // --- INÍCIO DO SERVIDOR ---
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
